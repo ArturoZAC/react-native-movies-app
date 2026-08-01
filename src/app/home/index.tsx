@@ -1,10 +1,11 @@
 import { ActivityIndicator, Text, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import MainSlidesShow from '@/modules/movies/components/MainSlidesShow';
 import { useMovies } from '@/modules/movies/hooks/useMovies';
 
 const HomeScreen = () => {
-  const safeArea = useSafeAreaInsets();
+  const safeArea = useSafeAreaInsets().top;
   const { nowPlayingQuery } = useMovies();
 
   if (nowPlayingQuery.isPending) {
@@ -16,8 +17,9 @@ const HomeScreen = () => {
   }
 
   return (
-    <View style={{ paddingTop: safeArea.top }}>
+    <View style={{ paddingTop: safeArea }}>
       <Text className="mb-2 px-4 text-3xl font-bold">HomeScreen</Text>
+      <MainSlidesShow movies={nowPlayingQuery.data ?? []} />
     </View>
 
     // <SafeAreaView>
