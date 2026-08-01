@@ -1,7 +1,7 @@
 import { ActivityIndicator, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import MainSlidesShow from '@/modules/movies/components/MainSlidesShow';
+import MainSlidesShow from '@/modules/movies/components/movies/MainSlidesShow';
 import { useMovies } from '@/modules/movies/hooks/useMovies';
 
 const HomeScreen = () => {
@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   return (
     <View style={{ paddingTop: safeArea }}>
-      <Text className="mb-2 px-4 text-3xl font-bold">HomeScreen</Text>
+      <Text className="mb-2 px-4 text-3xl font-bold">MoviesApp</Text>
       <MainSlidesShow movies={nowPlayingQuery.data ?? []} />
     </View>
 
