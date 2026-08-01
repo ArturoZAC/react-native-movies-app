@@ -18,17 +18,12 @@ const MoviePoster = ({ id, poster, smallPoster = false, className }: Props) => {
         width,
         height,
         borderRadius: 16,
-        backgroundColor: '#fff', // necesario para que Android calcule bien la sombra
-        elevation: 10,
-        // Sombra en iOS (va también acá, no en el Image)
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 8,
+        backgroundColor: '#fff',
       }}>
       <Image
         source={{ uri: poster }}
         resizeMode="cover"
+        // className="px-2"
         style={{
           width,
           height,
