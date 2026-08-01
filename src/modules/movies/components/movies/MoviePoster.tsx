@@ -23,7 +23,6 @@ const MoviePoster = ({ id, poster, smallPoster = false, className }: Props) => {
       <Image
         source={{ uri: poster }}
         resizeMode="cover"
-        // className="px-2"
         style={{
           width,
           height,
