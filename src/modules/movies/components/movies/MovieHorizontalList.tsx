@@ -20,7 +20,9 @@ const MovieHorizontalList = ({ title, movies }: Props) => {
         keyExtractor={(movie) => `${movie.id}`}
         style={{ height: 128 }}
         contentContainerStyle={{ gap: 8, paddingHorizontal: 16 }}
-        renderItem={({ item }) => <MoviePoster id={item.id} poster={item.poster} smallPoster />}
+        renderItem={({ item }) => (
+          <MoviePoster id={item.id} poster={item.poster} smallPoster withShadow={false} />
+        )}
       />
     </View>
   );
