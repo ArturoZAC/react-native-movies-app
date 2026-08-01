@@ -2,9 +2,11 @@ const { defineConfig } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
 const tsParser = require('@typescript-eslint/parser');
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
+const pluginQuery = require('@tanstack/eslint-plugin-query');
 
 module.exports = defineConfig([
   expoConfig,
+  ...pluginQuery.configs['flat/recommended'],
   {
     ignores: ['dist/*'],
   },

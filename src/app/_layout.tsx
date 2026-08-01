@@ -1,16 +1,22 @@
-import { Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { nowPlayingService } from '@/modules/movies/services/now-playing.service';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Stack } from 'expo-router';
 
 import './global.css';
 
-export default function Layout() {
-  nowPlayingService();
+const queryClient = new QueryClient();
 
+export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <Text className="flex text-2xl font-black text-green-500">Hello Movies App</Text>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }
