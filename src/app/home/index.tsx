@@ -6,8 +6,8 @@ import MovieHorizontalList from '@/modules/movies/components/movies/MovieHorizon
 import { useMovies } from '@/modules/movies/hooks/useMovies';
 
 const HomeScreen = () => {
-  const safeArea = useSafeAreaInsets().top;
-  const { nowPlayingQuery, popularQuery } = useMovies();
+  const insets = useSafeAreaInsets();
+  const { nowPlayingQuery, popularQuery, topRatedQuery, upcomingQuery } = useMovies();
 
   if (nowPlayingQuery.isPending) {
     return (
@@ -18,11 +18,21 @@ const HomeScreen = () => {
   }
 
   return (
-    <ScrollView className="flex-1" style={{ paddingTop: safeArea }}>
-      <Text className="mb-2 px-4 text-3xl font-bold">MoviesApp</Text>
-      <MainSlidesShow movies={nowPlayingQuery.data ?? []} />
+    <ScrollView
+      style={{ flex: 1 }}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom + 24,
+      }}>
+      <View>
+        <Text className="mb-2 px-4 text-3xl font-bold">MoviesApp</Text>
+        <MainSlidesShow movies={nowPlayingQuery.data ?? []} />
 
-      <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []} />
+        <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []} />
+        <MovieHorizontalList title="Mejor Calificadas" movies={topRatedQuery.data ?? []} />
+        <MovieHorizontalList title="Proximamente" movies={upcomingQuery.data ?? []} />
+      </View>
     </ScrollView>
   );
 };

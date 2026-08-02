@@ -6,11 +6,12 @@ import { Movie } from '@/modules/movies/interfaces/movies.interface';
 interface Props {
   title?: string;
   movies: Movie[];
+  className?: string;
 }
 
-const MovieHorizontalList = ({ title, movies }: Props) => {
+const MovieHorizontalList = ({ title, movies, className }: Props) => {
   return (
-    <View className="mt-4">
+    <View className={`mt-4 ${className}`}>
       {title && <Text className="mb-2 px-4 text-3xl font-bold">{title}</Text>}
 
       <FlatList
