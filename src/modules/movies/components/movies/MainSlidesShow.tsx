@@ -1,39 +1,3 @@
-// import { useWindowDimensions, View } from 'react-native';
-// import { Carousel } from 'react-native-reanimated-carousel';
-
-// import MoviePoster from '@/modules/movies/components/movies/MoviePoster';
-// import { Movie } from '@/modules/movies/interfaces/movies.interface';
-
-// interface Props {
-//   movies: Movie[];
-// }
-
-// const MainSlidesShow = ({ movies }: Props) => {
-//   const width = useWindowDimensions().width;
-
-//   return (
-//     <View className="w-full">
-//       <Carousel
-//         defaultIndex={0}
-//         data={movies}
-//         itemSize={width * 0.5}
-//         layout={{ type: 'parallax', scale: 0.9, offset: 60 }}
-//         loop
-//         renderItem={({ item }) => <MoviePoster id={item.id} poster={item.poster} />}
-//         style={{
-//           width: width,
-//           // El alto del carousel = alto del MoviePoster grande (256px)
-//           height: 256,
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         }}
-//       />
-//     </View>
-//   );
-// };
-
-// export default MainSlidesShow;
-
 import { useRef, useState } from 'react';
 
 import { Animated, useWindowDimensions, View } from 'react-native';
