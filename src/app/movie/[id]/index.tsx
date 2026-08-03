@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useLocalSearchParams } from 'expo-router';
 
+import MovieDescription from '@/modules/movies/components/movie/MovieDescription';
 import MovieHeader from '@/modules/movies/components/movie/MovieHeader';
 import { useMovie } from '@/modules/movies/hooks/useMovie';
 
@@ -27,6 +28,8 @@ const MovieDetailScreen = () => {
         poster={movieQuery.data!.poster}
         title={movieQuery.data!.title}
       />
+
+      <MovieDescription movie={movieQuery.data!} />
     </ScrollView>
   );
 };
