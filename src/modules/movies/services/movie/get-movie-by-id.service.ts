@@ -3,11 +3,9 @@ import { CompleteMovie } from '@/modules/movies/interfaces/movies.interface';
 import { MovieDetail } from '@/modules/movies/interfaces/movies-detail.response';
 import { MovieMapper } from '@/modules/movies/mappers/movies.mapper';
 
-export const getMovieById = async (id: string): Promise<CompleteMovie> => {
+export const getMovieByIdService = async (id: string): Promise<CompleteMovie> => {
   try {
     const { data } = await moviesApi.get<MovieDetail>(`/${id}`);
-
-    console.log(data);
 
     return MovieMapper.fromTheMovieDbToCompleteMovie(data);
   } catch (error) {
