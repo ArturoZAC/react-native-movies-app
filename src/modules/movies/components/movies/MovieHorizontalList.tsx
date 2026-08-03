@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 import MoviePoster from '@/modules/movies/components/movies/MoviePoster';
 import { Movie } from '@/modules/movies/interfaces/movies.interface';
@@ -9,23 +9,21 @@ interface Props {
   title?: string;
   movies: Movie[];
   className?: string;
-  loadNextPage?: () => void;
+  loadNextPage?: () => Promise<unknown>;
 }
 
 const MovieHorizontalList = ({ title, movies, className, loadNextPage }: Props) => {
   const isLoading = useRef(false);
-  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (isLoading.current) return;
 
-    const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
-
-    const isEndReached = contentOffset.x + layoutMeasurement.width + 500 >= contentSize.width;
-    if (!isEndReached) return;
+  const onEndReached = async () => {
+    if (isLoading.current || !loadNextPage) return;
 
     isLoading.current = true;
-    console.log('Cargar siguientes peliculas');
-
-    loadNextPage && loadNextPage();
+    try {
+      await loadNextPage();
+    } finally {
+      isLoading.current = false;
+    }
   };
 
   return (
@@ -40,7 +38,11 @@ const MovieHorizontalList = ({ title, movies, className, loadNextPage }: Props) 
         style={{ height: 128 }}
         contentContainerStyle={{ gap: 8, paddingHorizontal: 16 }}
         renderItem={({ item }) => <MoviePoster id={item.id} poster={item.poster} smallPoster />}
-        onScroll={onScroll}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={1.5}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={5}
       />
     </View>
   );

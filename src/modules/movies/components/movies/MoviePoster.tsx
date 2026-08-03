@@ -1,4 +1,8 @@
+import { memo } from 'react';
+
 import { Image, Pressable } from 'react-native';
+
+import { router } from 'expo-router';
 
 interface Props {
   id: number;
@@ -13,6 +17,7 @@ const MoviePoster = ({ id, poster, smallPoster = false, className }: Props) => {
 
   return (
     <Pressable
+      onPress={() => router.push({ pathname: '/movie/[id]', params: { id: String(id) } })}
       className={`active:opacity-90 ${className}`}
       style={{
         width,
@@ -33,4 +38,4 @@ const MoviePoster = ({ id, poster, smallPoster = false, className }: Props) => {
   );
 };
 
-export default MoviePoster;
+export default memo(MoviePoster);
